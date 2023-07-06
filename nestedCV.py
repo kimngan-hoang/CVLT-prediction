@@ -166,7 +166,7 @@ if __name__ == '__main__':
            'L_HH_DG', 'R_HH_DG', 'L_HB_DG', 'R_HB_DG', 'L_HT_DG', 'R_HT_DG',
            'L_HH_Sub', 'R_HH_Sub', 'L_HB_Sub', 'R_HB_Sub', 'L_HT_Sub', 'R_HT_Sub']
     #preprocess
-    df = preprocessing(data, columns)
+    df = data[columns].dropna(inplace = True)
 
     #Initialize Regressor
     model = ElasticNet()
@@ -177,10 +177,9 @@ if __name__ == '__main__':
                  ]
     target = ['CVLT_Imm_Total']
     
-    # _, _, _, _, _, = nested_cv(feature_names=feature_names,
-    #                            target=target,
-    #                            df=df,
-    #                            model = model,
-    #                            param_grid=param_grid
-    #                            )
-    print(df.columns.values)
+    _, _, _, _, _, = nested_cv(feature_names=feature_names,
+                               target=target,
+                               df=df,
+                               model = model,
+                               param_grid=param_grid
+                               )

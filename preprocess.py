@@ -10,6 +10,7 @@ from sklearn.model_selection import cross_val_score
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 from sklearn.linear_model import ElasticNet
 
+
 #Function for categorise dataframe
 def categorise(row):
     if row['AgeGroup'] == 1 and row['Sex'] == 0:
@@ -45,16 +46,7 @@ def categorise(row):
     elif row['AgeGroup'] == 8 and row['Sex'] == 1:
         return 16
 
-def preprocessing(main_df, columns):
-    #Subset data
-    main_df = main_df.copy()
-    df = main_df[columns]
-    # drop missing data list-wise
-    df = df.dropna()
-    #reset index -- this is to replace old data index with index based on current data.
-    df = df.reset_index(drop=True)
-    #Change Sex from 1(male),2 (female) to 0 (Male),1 (Female)   
-    df.Sex = df.Sex-1 
+def preprocessing(df):
     #Bin Age into groups
     bins = [10, 20, 30, 40, 50, 60, 70, 80, 90]
     labels = [1,2,3,4,5,6,7,8]
