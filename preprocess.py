@@ -47,6 +47,7 @@ def categorise(row):
         return 16
 
 def preprocess(df):
+    df['Sex'] = df['Sex']-1
     #Bin Age into groups
     bins = [10, 20, 30, 40, 50, 60, 70, 80, 90]
     labels = [1,2,3,4,5,6,7,8]
@@ -54,5 +55,4 @@ def preprocess(df):
     df = df.reset_index(drop=True)
     #Apply categories to dataframe
     df['grp'] = df.apply(lambda row: categorise(row), axis=1)
-    df['Sex'] = df['Sex']-1
     return df
