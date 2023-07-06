@@ -46,13 +46,13 @@ def categorise(row):
     elif row['AgeGroup'] == 8 and row['Sex'] == 1:
         return 16
 
-def preprocessing(df):
+def preprocess(df):
     #Bin Age into groups
     bins = [10, 20, 30, 40, 50, 60, 70, 80, 90]
     labels = [1,2,3,4,5,6,7,8]
-    df['AgeGroup'] = pd.cut(df['Age'], bins=bins, labels=labels)
+    df.loc[: ,'AgeGroup'] = pd.cut(df['Age'], bins=bins, labels=labels)
     df = df.reset_index(drop=True)
     #Apply categories to dataframe
     df['grp'] = df.apply(lambda row: categorise(row), axis=1)
-    
+    df['Sex'] = df['Sex']-1
     return df
